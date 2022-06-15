@@ -556,7 +556,7 @@ export default defineComponent({
       
     },
     prev() {
-      this.step = this.previous.length ? this.previous.pop()! : 1;
+      this.step = this.previous.length ? this.previous.pop()! : 0
     },
     handleCheckboxes(q: number) {
       console.log(q);
@@ -609,10 +609,10 @@ export default defineComponent({
 
         if (this.reduce_operations) {
           let temp: number[] = this.quarters.filter(function (n) {
-            return nums.indexOf(n) !== -1;
+            return nums.indexOf(n) === -1;
           });
 
-          this._941_fields = [...temp];
+          this._941_fields = [...temp,...nums];
         } else if (this.useful_info === 0)
           this._941_fields = [...this.valid_revenue];
       }
