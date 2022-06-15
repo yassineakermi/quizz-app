@@ -529,7 +529,7 @@ export default defineComponent({
   data() {
     return {
       step: 0,
-      previous: 0,
+      previous: [] as number[],
       reduce_operations: true,
       useful_info: 0,
       number_employes_step3: 0,
@@ -541,6 +541,7 @@ export default defineComponent({
   },
   methods: {
     next() {
+      this.previous.push(this.step)
       if (this.step === 1) this.step = this.reduce_operations ? 2 : 3;
       else if (this.step === 3) {
         if (this.useful_info === 0 || this.useful_info === 2) this.step = 4;
@@ -552,9 +553,10 @@ export default defineComponent({
       } else {
         this.step = this.step + 1;
       }
+      
     },
     prev() {
-      this.step = this.previous;
+      this.step = this.previous.length ? this.previous.pop()! : 1;
     },
     handleCheckboxes(q: number) {
       console.log(q);
