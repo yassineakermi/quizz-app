@@ -541,7 +541,7 @@ export default defineComponent({
   },
   methods: {
     next() {
-      this.previous.push(this.step)
+      this.previous.push(this.step);
       if (this.step === 1) this.step = this.reduce_operations ? 2 : 3;
       else if (this.step === 3) {
         if (this.useful_info === 0 || this.useful_info === 2) this.step = 4;
@@ -553,10 +553,9 @@ export default defineComponent({
       } else {
         this.step = this.step + 1;
       }
-      
     },
     prev() {
-      this.step = this.previous.length ? this.previous.pop()! : 0
+      this.step = this.previous.length ? this.previous.pop()! : 0;
     },
     handleCheckboxes(q: number) {
       console.log(q);
@@ -583,7 +582,34 @@ export default defineComponent({
   watch: {
     step(newStep, oldStep) {
       if (this.step === 6) {
+
         setTimeout(() => {
+        if (!this.reduce_operations) {
+          if (this.useful_info !== 0 && this.useful_info !== 2)
+            this._941_fields = [1, 2, 3, 4, 5, 6, 7];
+          else {
+            let nums = [...this.valid_revenue];
+            let temp: number[] = this.quarters.filter(function (n) {
+              return nums.indexOf(n) === -1;
+            });
+            this._941_fields = [...temp, ...nums];
+          }
+        } else if (this.reduce_operations) {
+          console.log('here now');
+          
+          let nums = [...this.valid_revenue];
+          console.log(this.valid_revenue,'nums1');
+
+          let temp: number[] = this.quarters.filter(function (n) {
+            return nums.indexOf(n) === -1;
+          });
+          console.log(temp,'temp');
+          console.log(nums,'nums');
+          
+          
+          this._941_fields = [...temp, ...nums];
+        }
+
           var my_awesome_script = document.createElement("script");
 
           my_awesome_script.setAttribute("src", "./_941_calculator.js");
@@ -595,9 +621,6 @@ export default defineComponent({
         document.getElementById("my_awesome_script1")?.remove();
       }
 
-      if (newStep === 5) {
-        if (this.useful_info != 0) this._941_fields = [1, 2, 3, 4, 5, 6, 7];
-      }
       if (oldStep === 4) {
         let nums: number[] = [];
         document
@@ -606,15 +629,6 @@ export default defineComponent({
             nums.push(parseInt(element.getAttribute("data")!))
           );
         this.valid_revenue = [...nums];
-
-        if (this.reduce_operations) {
-          let temp: number[] = this.quarters.filter(function (n) {
-            return nums.indexOf(n) === -1;
-          });
-
-          this._941_fields = [...temp,...nums];
-        } else if (this.useful_info === 0)
-          this._941_fields = [...this.valid_revenue];
       }
       if (this.step === 4) {
         setTimeout(() => {
