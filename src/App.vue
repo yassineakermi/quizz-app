@@ -1,5 +1,5 @@
 <template>
-  <div class="container card min">
+  <div v-if="step <= 12" class="container card min">
     <form v-if="step == 4">
       <div class="row form-row">
         <div class="col" style="text-align: center">2019 Revenue</div>
@@ -474,6 +474,7 @@
           />
         </div>
       </div>
+
       <br />
       <h3>Total Refunds 2020</h3>
       <input
@@ -548,11 +549,199 @@
       </div>
     </div>
     <div v-if="step == 7">
-      <h2>{{ conclusion_text }}</h2>
+      <h2 class="text-center">{{ conclusion_text }}</h2>
+      <br />
+      <p
+        class="text-center"
+        v-if="
+          (conclusion_text =
+            'congratulations on prequalifying for the ERC! A consultant will be reaching out shortly.')
+        "
+      >
+        Thank you for your submission. Please click below to take advantage of
+        ERTC Fundings compliance team and ERC Optimization software.
+      </p>
+      <br />
       <div class="d-flex justify-content-center p-2">
-        <button @click="prev()" class="btn btn btn-danger m-2">Refuse</button>
-        <button @click="next()" class="btn btn btn-primary m-2">Accept</button>
+        <a
+          @click="next(13)"
+          class="stretched-primary"
+          style="margin-right: 2.5rem; cursor: pointer"
+          >Speak to a specialist</a
+        >
+
+        <a
+          @click="next(14)"
+          class="stretched-primary"
+          style="margin-left: 2.5rem; cursor: pointer"
+          >Partner with us</a
+        >
       </div>
+    </div>
+  </div>
+
+  <div v-else id="form">
+    <div class="row">
+      <div class="col-lg-7 mx-auto">
+        <div class="card mt-2 mx-auto p-4 bg-light">
+          <div class="text-center mt-5">
+            <h1 v-if="step == 13">Speak To A Specialist</h1>
+            <h1 v-else>Partner With Us</h1>
+          </div>
+
+          <div class="card-body bg-light">
+            <div>
+              <form id="contact-form" role="form">
+                <div class="controls">
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input
+                          id="form_name"
+                          type="text"
+                          name="name"
+                          class="form-control"
+                          placeholder="Please enter your firstname *"
+                          required="required"
+                          data-error="Firstname is required."
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input
+                          id="form_lastname"
+                          type="text"
+                          name="surname"
+                          class="form-control"
+                          placeholder="Please enter your lastname *"
+                          required="required"
+                          data-error="Lastname is required."
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input
+                          id="form_email"
+                          type="email"
+                          name="email"
+                          class="form-control"
+                          placeholder="Please enter your email *"
+                          required="required"
+                          data-error="Valid email is required."
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input
+                          id="form_email"
+                          type="tel"
+                          name="phone"
+                          class="form-control"
+                          placeholder="Please enter your phone number *"
+                          required="required"
+                          data-error="Valid phone number is required."
+                        />
+                      </div>
+                    </div>
+
+                    <!-- <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="form_need"
+                          >Please specify your need *</label
+                        >
+                        <select
+                          id="form_need"
+                          name="need"
+                          class="form-control"
+                          required="required"
+                          data-error="Please specify your need."
+                        >
+                          <option value="" selected disabled>
+                            --Select Your Issue--
+                          </option>
+                          <option>Request Invoice for order</option>
+                          <option>Request order status</option>
+                          <option>Haven't received cashback yet</option>
+                          <option>Other</option>
+                        </select>
+                      </div>
+                    </div> -->
+                  </div>
+                  <div class="row mb-3">
+                    <div v-if="step == 14" class="col-md-6">
+                      <div class="form-group">
+                        <input
+                          id="form_companyname"
+                          type="text"
+                          name="form_companyname"
+                          class="form-control"
+                          placeholder="Please enter your company name *"
+                          required="required"
+                          data-error="Company name is required."
+                        />
+                      </div>
+                    </div>
+                    <div v-if="step == 13" class="col-md-12">
+                      <div class="form-group">
+                        <input
+                          id="form_businessname"
+                          type="text"
+                          name="form_businessname"
+                          class="form-control"
+                          placeholder="Please enter your business name *"
+                          required="required"
+                          data-error="Business name is required."
+                        />
+                      </div>
+                    </div>
+                    <div v-if="step == 14" class="col-md-6">
+                      <a
+                      target="_blank"
+                        href="https://calendly.com/izzy-28/ertc-funding-partner"
+                        class="link-primary"
+                        >Set Appoinment Time</a
+                      >
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <textarea
+                          id="form_message"
+                          name="message"
+                          class="form-control"
+                          placeholder="Do you have any comment?"
+                          rows="4"
+                          data-error="Please, leave us a message."
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-md-12 mt-2 self-center"
+                      style="display: flex; justify-content: center"
+                    >
+                      <input
+                        type="submit"
+                        class="btn btn-primary btn-send pt-2 btn-block"
+                        value="Apply for an appointment"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- /.8 -->
+      </div>
+      <!-- /.row-->
     </div>
   </div>
 </template>
@@ -603,9 +792,11 @@ export default defineComponent({
           (total - (parseInt(oldValue) > 0 ? parseInt(oldValue) : 0));
       }
     },
-    next() {
+    next(page: number = 0) {
+      console.log(this.step,'start')
       this.previous.push(this.step);
-      if (!this.step) this.step = 12;
+      if (page > 12) this.step = page;
+      else if (!this.step) this.step = 12;
       else if (this.step === 12) this.step = 1;
       else if (this.step === 1) this.step = this.reduce_operations ? 2 : 3;
       else if (this.step === 3) {
@@ -618,6 +809,7 @@ export default defineComponent({
       } else {
         this.step = this.step + 1;
       }
+      console.log(this.step,'end')
     },
     prev() {
       this.step = this.previous.length ? this.previous.pop()! : 0;
@@ -670,7 +862,8 @@ export default defineComponent({
           this.conclusion_text =
             this._2021_total + this._2020_total < 100000 ? impossible : congrat;
         else if (this.num_employees < 2) {
-          if (!this.convertToNumber(this.useful_info)) this.conclusion_text = impossible;
+          if (!this.convertToNumber(this.useful_info))
+            this.conclusion_text = impossible;
           else if (this.useful_info == 2) {
             if (this.valid_revenue.length)
               this.conclusion_text =
@@ -778,5 +971,38 @@ export default defineComponent({
 }
 .form-row {
   margin-bottom: 15px;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+#form h1 {
+  margin-bottom: 40px;
+}
+
+#form label {
+  color: #333;
+}
+
+#form .btn-send {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  width: 80%;
+  margin-left: 3px;
+}
+#form .help-block.with-errors {
+  color: #ff5050;
+  margin-top: 5px;
+}
+
+#form .card {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
