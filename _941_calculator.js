@@ -131,6 +131,10 @@ function pushRefund2(event) {
         }
     }
     console.log('------------------------------------');
+    let total2020= 0
+    qtrs.forEach(qt=>total2020=total2020+(parseInt(document.getElementById(qt['refund']).value)?parseInt(document.getElementById(qt['refund']).value) : 0))
+    document.getElementById('ref2020').value="$"+total2020
+    
 }
 
 document.querySelectorAll('.fetch').forEach(el=>el.addEventListener('change',pushRefund2))
