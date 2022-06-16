@@ -602,7 +602,7 @@
                           name="name"
                           class="form-control"
                           placeholder="Please enter your firstname *"
-                          required="required"
+                          :required="true"
                           data-error="Firstname is required."
                         />
                       </div>
@@ -615,7 +615,7 @@
                           name="surname"
                           class="form-control"
                           placeholder="Please enter your lastname *"
-                          required="required"
+                          :required="true"
                           data-error="Lastname is required."
                         />
                       </div>
@@ -630,7 +630,7 @@
                           name="email"
                           class="form-control"
                           placeholder="Please enter your email *"
-                          required="required"
+                          :required="true"
                           data-error="Valid email is required."
                         />
                       </div>
@@ -643,7 +643,7 @@
                           name="phone"
                           class="form-control"
                           placeholder="Please enter your phone number *"
-                          required="required"
+                          :required="true"
                           data-error="Valid phone number is required."
                         />
                       </div>
@@ -658,7 +658,7 @@
                           id="form_need"
                           name="need"
                           class="form-control"
-                          required="required"
+                          :required="true"
                           data-error="Please specify your need."
                         >
                           <option value="" selected disabled>
@@ -681,7 +681,7 @@
                           name="form_companyname"
                           class="form-control"
                           placeholder="Please enter your company name *"
-                          required="required"
+                          :required="true"
                           data-error="Company name is required."
                         />
                       </div>
@@ -694,7 +694,7 @@
                           name="form_businessname"
                           class="form-control"
                           placeholder="Please enter your business name *"
-                          required="required"
+                          :required="true"
                           data-error="Business name is required."
                         />
                       </div>
